@@ -1,8 +1,0 @@
-flask
-gspread
-google-auth
-google-auth-oauthlib
-flask-login
-flask-bcrypt
-web3
-gunicorn
