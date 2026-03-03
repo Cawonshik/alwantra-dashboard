@@ -1,6 +1,7 @@
 flask
 gspread
-oauth2client
+google-auth
+google-auth-oauthlib
 flask-login
 flask-bcrypt
 web3
