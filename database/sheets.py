@@ -1,4 +1,5 @@
 import os
+import json
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from database.config import SPREADSHEET_NAME
@@ -10,23 +11,30 @@ scope = [
     "https://www.googleapis.com/auth/drive",
 ]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "credentials.json",
-    scope
-)
+def get_client():
+    creds_json = os.environ.get("GOOGLE_SHEETS_CREDS_JSON")
 
-client = gspread.authorize(creds)
+    if not creds_json:
+        raise Exception("GOOGLE_SHEETS_CREDS_JSON not found")
+
+    creds_dict = json.loads(creds_json)
+
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(
+        creds_dict,
+        scope
+    )
+
+    return gspread.authorize(creds)
 
 
 # ================= GET SPREADSHEET =================
 
 def get_spreadsheet():
+    client = get_client()
     try:
         return client.open(SPREADSHEET_NAME)
     except:
-        # kalau belum ada → create otomatis
-        sh = client.create(SPREADSHEET_NAME)
-        return sh
+        return client.create(SPREADSHEET_NAME)
 
 
 # ================= GET SHEET =================
@@ -36,7 +44,6 @@ def get_sheet(sheet_name):
     try:
         return sh.worksheet(sheet_name)
     except:
-        # kalau sheet belum ada → create kosong
         return sh.add_worksheet(title=sheet_name, rows="2000", cols="20")
 
 
@@ -47,6 +54,5 @@ def init_sheet(sheet_name, headers):
 
     existing = sheet.get_all_values()
 
-    # kalau kosong → set header
     if not existing:
         sheet.append_row(headers)

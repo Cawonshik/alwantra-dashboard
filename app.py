@@ -5,29 +5,8 @@ from flask import Flask, render_template, request, redirect, jsonify, Response
 from flask_login import LoginManager, login_required, current_user
 from flask_bcrypt import Bcrypt
 
-# ================= DATABASE =================
-from database.init_db import init_db
-
-# ================= AUTH =================
-from auth.auth_routes import auth_bp
-from auth.user_model import User
-
-# ================= MODULES =================
-import modules.airdrop as airdrop
-import modules.address as address
-import modules.akun as akun
-
-# ================= WEB3 =================
-from web3_utils import get_balance
-
-
-# ==================================================
-# INIT APP
-# ==================================================
-
+# ================= SAFE INIT =================
 app = Flask(__name__)
-
-# ================= CONFIG =================
 app.secret_key = os.environ.get("SECRET_KEY", "CHANGE_THIS_SECRET")
 
 bcrypt = Bcrypt(app)
@@ -36,26 +15,27 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "auth.login"
 
+# ================= IMPORT AFTER APP INIT =================
+from auth.auth_routes import auth_bp
+from auth.user_model import User
+import modules.airdrop as airdrop
+import modules.address as address
+import modules.akun as akun
+from web3_utils import get_balance
+
 app.register_blueprint(auth_bp)
 
-
-# ==================================================
-# USER LOADER
-# ==================================================
+# ================= USER LOADER =================
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    try:
+        return User.get(user_id)
+    except Exception:
+        return None
 
 
 # ==================================================
-# INIT DB (ONLY LOCAL)
-# ==================================================
-if os.environ.get("VERCEL") is None:
-    init_db()
-
-
-# ==================================================
-# DASHBOARD AIRDROP
+# DASHBOARD
 # ==================================================
 
 @app.route("/")
@@ -75,6 +55,8 @@ def dashboard():
         pending=pending
     )
 
+
+# ================= AIRDROP =================
 
 @app.route("/add_airdrop", methods=["POST"])
 @login_required
@@ -131,13 +113,12 @@ def search_airdrop():
     return jsonify(results)
 
 
-# ================= EXPORT CSV =================
+# ================= EXPORT =================
 
 @app.route("/export_airdrop")
 @login_required
 def export_airdrop():
     data = airdrop.get_all(current_user.id)
-
     if not data:
         return redirect("/")
 
@@ -155,9 +136,7 @@ def export_airdrop():
     )
 
 
-# ==================================================
-# ADDRESS
-# ==================================================
+# ================= ADDRESS =================
 
 @app.route("/address")
 @login_required
@@ -196,20 +175,7 @@ def update_address(id):
     return redirect("/address")
 
 
-# ==================================================
-# WEB3 SCAN
-# ==================================================
-
-@app.route("/scan/<wallet>")
-@login_required
-def scan_wallet(wallet):
-    balance = get_balance(wallet)
-    return jsonify({"balance": balance})
-
-
-# ==================================================
-# AKUN
-# ==================================================
+# ================= AKUN =================
 
 @app.route("/akun")
 @login_required
@@ -248,9 +214,18 @@ def update_akun(id):
     return redirect("/akun")
 
 
-# ==================================================
-# RUN LOCAL
-# ==================================================
+# ================= WEB3 =================
 
+@app.route("/scan/<wallet>")
+@login_required
+def scan_wallet(wallet):
+    try:
+        balance = get_balance(wallet)
+        return jsonify({"balance": balance})
+    except Exception:
+        return jsonify({"balance": "0"})
+
+
+# ================= LOCAL RUN =================
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=False)
