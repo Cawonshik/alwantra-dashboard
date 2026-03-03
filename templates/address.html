@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title">ADDRESS</h1>
+
+<!-- ================= STATS ================= -->
+<div class="stats-row">
+    <div class="stat-card">
+        <span>Total Wallet</span>
+        <h2>{{ data|length }}</h2>
+    </div>
+</div>
+
+<!-- ================= FORM ================= -->
+<div class="card form-card">
+    <form method="POST" action="/add_address" class="form-row">
+        <input name="nomor" placeholder="Nomor">
+        <input name="evm" placeholder="EVM Address">
+        <input name="sol" placeholder="SOL Address">
+        <input name="sui" placeholder="SUI Address">
+        <button class="btn">ADD</button>
+    </form>
+</div>
+
+<!-- ================= GRID ================= -->
+<div class="address-grid">
+
+{% for item in data %}
+<div class="wallet-card">
+
+    <!-- HEADER -->
+    <div class="card-top">
+        <div class="card-title">
+            Wallet {{ item.nomor }}
+        </div>
+    </div>
+
+    <div class="card-divider"></div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+        <!-- EVM -->
+        <p>
+            <strong>EVM:</strong>
+            {% if item.evm %}
+                {% set evm = item.evm|string %}
+                {{ evm[:6] }}...{{ evm[-4:] }}
+                <button class="btn small" onclick="copy('{{evm}}')">📋</button>
+                <button class="btn small" onclick="scan('{{evm}}')">SCAN</button>
+            {% else %}
+                -
+            {% endif %}
+        </p>
+
+        <!-- SOL -->
+        <p>
+            <strong>SOL:</strong>
+            {% if item.sol %}
+                {% set sol = item.sol|string %}
+                {{ sol[:6] }}...{{ sol[-4:] }}
+                <button class="btn small" onclick="copy('{{sol}}')">📋</button>
+            {% else %}
+                -
+            {% endif %}
+        </p>
+
+        <!-- SUI -->
+        <p>
+            <strong>SUI:</strong>
+            {% if item.sui %}
+                {% set sui = item.sui|string %}
+                {{ sui[:6] }}...{{ sui[-4:] }}
+                <button class="btn small" onclick="copy('{{sui}}')">📋</button>
+            {% else %}
+                -
+            {% endif %}
+        </p>
+
+    </div>
+
+    <!-- ACTION -->
+    <div class="card-actions">
+        <a class="btn small danger"
+           href="/delete_address/{{ item.id }}"
+           onclick="return confirm('Delete this wallet?')">
+           DELETE
+        </a>
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+<script>
+function copy(text){
+    if(!text) return;
+    navigator.clipboard.writeText(text);
+    toast("Copied!");
+}
+
+function scan(addr){
+    if(!addr) return;
+    window.open("https://etherscan.io/address/" + addr, "_blank");
+}
+
+function toast(msg){
+    let el = document.createElement("div");
+    el.innerText = msg;
+    el.style.position = "fixed";
+    el.style.bottom = "20px";
+    el.style.right = "20px";
+    el.style.background = "#00ffe0";
+    el.style.color = "black";
+    el.style.padding = "8px 12px";
+    el.style.borderRadius = "6px";
+    el.style.boxShadow = "0 0 10px #00ffe0";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(), 1000);
+}
+</script>
+
+{% endblock %}

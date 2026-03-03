@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title">EDIT AIRDROP</h1>
+
+<div class="card form-card">
+<form method="POST" action="/update_airdrop/{{item.id}}" class="form-row">
+
+    <input name="name" value="{{item.name}}" placeholder="Airdrop Name">
+    <input name="type" value="{{item.type}}" placeholder="Type">
+    <input name="chain" value="{{item.chain}}" placeholder="Chain">
+    <input name="wallet" value="{{item.wallet}}" placeholder="Wallet">
+    <input name="channel" value="{{item.channel}}" placeholder="Channel">
+    <input name="note" value="{{item.note}}" placeholder="Note">
+
+    <button class="btn">UPDATE</button>
+
+</form>
+</div>
+
+{% endblock %}

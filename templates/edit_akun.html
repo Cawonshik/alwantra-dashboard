@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title">EDIT AKUN</h1>
+
+<div class="card form-card">
+<form method="POST" action="/update_akun/{{item.id}}" class="form-row">
+
+    <input name="gmail" value="{{item.gmail}}" placeholder="gmail">
+    <input name="twitter" value="{{item.twitter}}" placeholder="twitter">
+    <input name="telegram" value="{{item.telegram}}" placeholder="telegram">
+    <input name="discord" value="{{item.discord}}" placeholder="discord">
+    <input name="github" value="{{item.github}}" placeholder="github">
+
+    <button class="btn">UPDATE</button>
+
+</form>
+</div>
+
+{% endblock %}
