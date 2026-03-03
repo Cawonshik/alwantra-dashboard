@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_required, current_user
 from flask_bcrypt import Bcrypt
 from io import StringIO
 import csv
+import os
 
 # ================= DATABASE =================
 from database.init_db import init_db
@@ -19,9 +20,14 @@ import modules.akun as akun
 # ================= WEB3 =================
 from web3_utils import get_balance
 
-# ================= APP INIT =================
+# ==================================================
+# INIT APP
+# ==================================================
+
 app = Flask(__name__)
-app.secret_key = "SUPER_SECRET_KEY_CHANGE_THIS"
+
+# Gunakan ENV kalau nanti deploy
+app.secret_key = os.environ.get("SECRET_KEY", "CHANGE_THIS_SECRET")
 
 bcrypt = Bcrypt(app)
 
@@ -35,6 +41,7 @@ app.register_blueprint(auth_bp)
 def load_user(user_id):
     return User.get(user_id)
 
+# Init Database
 init_db()
 
 # ==================================================
@@ -80,8 +87,6 @@ def done_airdrop(id):
     return redirect("/")
 
 
-# ================= EDIT AIRDROP =================
-
 @app.route("/edit_airdrop/<id>")
 @login_required
 def edit_airdrop(id):
@@ -96,7 +101,7 @@ def update_airdrop(id):
     return redirect("/")
 
 
-# ================= SEARCH REALTIME =================
+# ================= SEARCH =================
 
 @app.route("/search_airdrop")
 @login_required
@@ -137,7 +142,6 @@ def export_airdrop():
         headers={"Content-Disposition": "attachment;filename=airdrop.csv"}
     )
 
-
 # ==================================================
 # ADDRESS
 # ==================================================
@@ -162,8 +166,6 @@ def delete_address(id):
     address.delete(id, current_user.id)
     return redirect("/address")
 
-
-# ================= EDIT ADDRESS =================
 
 @app.route("/edit_address/<id>")
 @login_required
@@ -213,8 +215,6 @@ def delete_akun(id):
     return redirect("/akun")
 
 
-# ================= EDIT AKUN =================
-
 @app.route("/edit_akun/<id>")
 @login_required
 def edit_akun(id):
@@ -230,8 +230,8 @@ def update_akun(id):
 
 
 # ==================================================
-# RUN
+# RUN LOCAL ONLY
 # ==================================================
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run()
