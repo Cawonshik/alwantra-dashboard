@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="page-title">AKUN AIRDROP</h1>
+
+<!-- ================= FORM ================= -->
+<div class="card form-card">
+    <form method="POST" action="/add_akun" class="form-row">
+
+        <input name="gmail" placeholder="Gmail">
+        <input name="twitter" placeholder="Twitter">
+        <input name="telegram" placeholder="Telegram">
+        <input name="discord" placeholder="Discord">
+        <input name="github" placeholder="Github">
+
+        <button class="btn">ADD</button>
+
+    </form>
+</div>
+
+<hr class="divider">
+
+<!-- ================= GRID 2 KOLOM ================= -->
+<div class="airdrop-grid">
+
+{% for item in data %}
+<div class="airdrop-card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+        <span class="title">ACCOUNT #{{ loop.index }}</span>
+    </div>
+
+    <hr>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+        <div class="wallet-row">
+            <span class="label">📧 Gmail</span>
+            <span>{{ item.gmail or '-' }}</span>
+        </div>
+
+        <div class="wallet-row">
+            <span class="label">🐦 Twitter</span>
+            <span>{{ item.twitter or '-' }}</span>
+        </div>
+
+        <div class="wallet-row">
+            <span class="label">💬 Telegram</span>
+            <span>{{ item.telegram or '-' }}</span>
+        </div>
+
+        <div class="wallet-row">
+            <span class="label">🎮 Discord</span>
+            <span>{{ item.discord or '-' }}</span>
+        </div>
+
+        <div class="wallet-row">
+            <span class="label">💻 Github</span>
+            <span>{{ item.github or '-' }}</span>
+        </div>
+
+    </div>
+
+    <!-- ACTION -->
+    <div class="card-actions" style="margin-top:15px;">
+        <a class="btn danger" href="/delete_akun/{{item.id}}">DELETE</a>
+        <a class="btn" href="/edit_akun/{{item.id}}">EDIT</a>
+    </div>
+
+</div>
+{% endfor %}
+
+</div>
+
+{% endblock %}
