@@ -424,79 +424,17 @@ opacity:0.6;
 }
 
 
-/* ================= STATUS BADGE ================= */
-
-.status{
-
-padding:4px 10px;
-
-font-size:11px;
-
-border-radius:6px;
-
-border:1px solid #00ffe0;
-
-color:#00ffe0;
-
-text-transform:lowercase;
-
-}
-
-
-.status.done{
-
-border-color:#00ff88;
-
-color:#00ff88;
-
-}
-
-
-/* ================= CARD BODY ================= */
-
-.card-body{
-
-margin-top:6px;
-
-}
-
-
-.card-body p{
-
-margin-bottom:10px;
-
-font-size:14px;
-
-}
-
-
-.card-body a{
-
-color:#00aaff;
-
-text-decoration:none;
-
-}
-
-
-.card-body a:hover{
-
-text-decoration:underline;
-
-}
-
-
-/* ================= ACCOUNT ROW ================= */
+/* ================= ACCOUNT / ADDRESS ROW ================= */
 
 .wallet-row{
 
 display:grid;
 
-grid-template-columns:140px 1fr auto;
+grid-template-columns:140px 1fr auto auto;
 
 align-items:center;
 
-gap:10px;
+gap:8px;
 
 margin-bottom:10px;
 
@@ -505,11 +443,16 @@ font-size:14px;
 }
 
 
-/* label */
-
 .label{
 
 opacity:0.7;
+
+}
+
+
+.value{
+
+font-size:14px;
 
 }
 
@@ -556,17 +499,23 @@ transform:scale(1.05);
 }
 
 
-/* ================= COPY ALL BUTTON ================= */
+/* ================= SCAN BUTTON ================= */
 
-.copy-all{
+.scan-btn{
 
-margin-bottom:20px;
+display:flex;
 
-padding:10px 18px;
+align-items:center;
 
-border-radius:8px;
+justify-content:center;
 
-border:1px solid #00ffe0;
+height:24px;
+
+padding:0 10px;
+
+border-radius:6px;
+
+border:1px solid rgba(0,255,224,0.5);
 
 background:transparent;
 
@@ -576,16 +525,18 @@ cursor:pointer;
 
 transition:0.2s;
 
+font-size:12px;
+
 }
 
 
-.copy-all:hover{
+.scan-btn:hover{
 
 background:#00ffe0;
 
 color:#000;
 
-box-shadow:0 0 12px #00ffe0;
+box-shadow:0 0 10px #00ffe0;
 
 }
 
@@ -649,100 +600,9 @@ flex-wrap:wrap;
 }
 
 
-/* ================= LOGIN PAGE ================= */
-
-.auth-wrapper{
-
-min-height:80vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-}
-
-
-.auth-card{
-
-width:100%;
-
-max-width:420px;
-
-background:#061321;
-
-border:1px solid rgba(0,255,224,0.3);
-
-border-radius:16px;
-
-padding:40px;
-
-box-shadow:0 20px 50px rgba(0,0,0,0.7);
-
-}
-
-
-.auth-card h2{
-
-margin-bottom:25px;
-
-text-align:center;
-
-text-shadow:0 0 10px rgba(0,255,224,0.6);
-
-}
-
-
-.auth-card form{
-
-display:flex;
-
-flex-direction:column;
-
-gap:15px;
-
-}
-
-
-.auth-footer{
-
-margin-top:20px;
-
-text-align:center;
-
-font-size:14px;
-
-}
-
-
-.auth-footer a{
-
-color:#8f5bff;
-
-text-decoration:none;
-
-}
-
-
-.auth-footer a:hover{
-
-text-decoration:underline;
-
-}
-
-
 /* ================= MOBILE ================= */
 
 @media(max-width:768px){
-
-.top-header{
-padding:20px;
-}
-
-.logo{
-font-size:22px;
-}
 
 .container{
 padding:20px;
@@ -752,36 +612,8 @@ padding:20px;
 font-size:24px;
 }
 
-.nav-wrapper{
-flex-direction:column;
-align-items:flex-start;
-gap:15px;
-}
-
-.menu{
-flex-wrap:wrap;
-gap:8px;
-}
-
-.menu a{
-padding:8px 12px;
-font-size:13px;
-}
-
-.top-actions{
-width:100%;
-}
-
-.top-actions input{
-width:100%;
-}
-
 .stats-row{
 flex-direction:column;
-}
-
-.stat-card{
-padding:25px;
 }
 
 .form-row{
@@ -797,13 +629,8 @@ width:100%;
 grid-template-columns:1fr;
 }
 
-.airdrop-card,
-.wallet-card{
-padding:20px;
-}
-
 .wallet-row{
-grid-template-columns:110px 1fr auto;
+grid-template-columns:110px 1fr auto auto;
 font-size:13px;
 }
 
