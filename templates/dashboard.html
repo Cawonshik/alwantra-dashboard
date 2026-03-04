@@ -57,7 +57,9 @@ class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
 <input name="note" placeholder="Note"
 class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
 
-<button class="bg-cyan-500 hover:bg-cyan-400 text-black rounded font-semibold py-2">
+<button
+type="submit"
+class="bg-cyan-500 hover:bg-cyan-400 text-black rounded font-semibold py-2">
 Add
 </button>
 
@@ -115,10 +117,12 @@ Add
 <span class="text-gray-500">Channel</span><br>
 
 {% if item["channel"] %}
+
 <a href="{{ item['channel'] }}" target="_blank"
 class="text-cyan-400 hover:underline">
 OPEN
 </a>
+
 {% else %}
 -
 {% endif %}

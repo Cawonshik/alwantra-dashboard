@@ -27,24 +27,30 @@ class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:bo
 />
 
 <button
+type="submit"
 class="w-full bg-cyan-400 text-black font-semibold py-3 rounded-lg hover:bg-cyan-300 transition">
 Register
 </button>
 
 </form>
 
+<!-- Divider -->
 <div class="flex items-center my-6">
 <div class="flex-1 border-t border-gray-700"></div>
 <span class="px-3 text-gray-400 text-sm">atau</span>
 <div class="flex-1 border-t border-gray-700"></div>
 </div>
 
+<!-- Social Register -->
 <div class="flex flex-col gap-3">
 
 <a href="/login/google"
-class="text-center border border-gray-700 py-2 rounded-lg hover:border-cyan-400">
+class="text-center border border-gray-700 py-2 rounded-lg hover:border-cyan-400 text-white transition">
 Register dengan Google
 </a>
+
+<!-- Telegram Login -->
+<div class="flex justify-center">
 
 <script async src="https://telegram.org/js/telegram-widget.js?22"
 data-telegram-login="USERNAME_BOT_KAMU"
@@ -52,6 +58,8 @@ data-size="large"
 data-userpic="false"
 data-auth-url="/telegram_login">
 </script>
+
+</div>
 
 </div>
 

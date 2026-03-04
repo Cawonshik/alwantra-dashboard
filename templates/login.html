@@ -3,66 +3,73 @@
 
 <div class="flex items-center justify-center min-h-screen">
 
-<div class="w-full max-w-md bg-[#0b0f1a] border border-gray-800 rounded-xl p-8 shadow-lg">
+    <div class="w-full max-w-md bg-[#0b0f1a] border border-gray-800 rounded-xl p-8 shadow-lg">
 
-<h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">
-Login
-</h2>
+        <h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">
+            Login
+        </h2>
 
-<form method="POST" class="space-y-4">
+        <form method="POST" class="space-y-4">
 
-<input 
-name="username"
-placeholder="Username / Email"
-required
-class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-400 outline-none"
-/>
+            <input 
+                name="username"
+                placeholder="Username / Email"
+                required
+                class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-400 outline-none"
+            />
 
-<input 
-name="password"
-type="password"
-placeholder="Password"
-required
-class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-400 outline-none"
-/>
+            <input 
+                name="password"
+                type="password"
+                placeholder="Password"
+                required
+                class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-400 outline-none"
+            />
 
-<button 
-class="w-full bg-cyan-400 text-black font-semibold py-3 rounded-lg hover:bg-cyan-300 transition">
-Login
-</button>
+            <button 
+                type="submit"
+                class="w-full bg-cyan-400 text-black font-semibold py-3 rounded-lg hover:bg-cyan-300 transition">
+                Login
+            </button>
 
-</form>
+        </form>
 
-<div class="flex items-center my-6">
-<div class="flex-1 border-t border-gray-700"></div>
-<span class="px-3 text-gray-400 text-sm">atau</span>
-<div class="flex-1 border-t border-gray-700"></div>
-</div>
+        <!-- Divider -->
+        <div class="flex items-center my-6">
+            <div class="flex-1 border-t border-gray-700"></div>
+            <span class="px-3 text-gray-400 text-sm">atau</span>
+            <div class="flex-1 border-t border-gray-700"></div>
+        </div>
 
-<div class="flex flex-col gap-3">
+        <!-- Social Login -->
+        <div class="flex flex-col gap-3">
 
-<a href="/login/google"
-class="text-center border border-gray-700 py-2 rounded-lg hover:border-cyan-400">
-Login dengan Google
-</a>
+            <a href="/login/google"
+            class="text-center border border-gray-700 py-2 rounded-lg hover:border-cyan-400 text-white transition">
+                Login dengan Google
+            </a>
 
-<script async src="https://telegram.org/js/telegram-widget.js?22"
-data-telegram-login="USERNAME_BOT_KAMU"
-data-size="large"
-data-userpic="false"
-data-auth-url="/telegram_login">
-</script>
+            <div class="flex justify-center">
 
-</div>
+                <script async src="https://telegram.org/js/telegram-widget.js?22"
+                data-telegram-login="USERNAME_BOT_KAMU"
+                data-size="large"
+                data-userpic="false"
+                data-auth-url="/telegram_login">
+                </script>
 
-<p class="text-center text-gray-400 mt-6">
-Belum punya akun?
-<a href="/register" class="text-cyan-400 hover:underline">
-Register
-</a>
-</p>
+            </div>
 
-</div>
+        </div>
+
+        <p class="text-center text-gray-400 mt-6">
+            Belum punya akun?
+            <a href="/register" class="text-cyan-400 hover:underline">
+                Register
+            </a>
+        </p>
+
+    </div>
 
 </div>
 

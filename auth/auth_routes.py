@@ -8,6 +8,7 @@ from auth.user_model import User
 auth_bp = Blueprint("auth", __name__)
 bcrypt = Bcrypt()
 
+
 # ================= REGISTER =================
 @auth_bp.route("/register", methods=["GET", "POST"])
 def register():
@@ -120,5 +121,6 @@ def telegram_login():
 @auth_bp.route("/logout")
 @login_required
 def logout():
+
     logout_user()
     return redirect("/login")
