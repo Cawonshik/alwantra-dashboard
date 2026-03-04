@@ -1,7 +1,9 @@
 Flask
 flask-login
 flask-bcrypt
+flask-dance
 gspread
 oauth2client
 gunicorn
 web3
+python-dotenv
