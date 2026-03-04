@@ -5,98 +5,183 @@
 
 <!-- ================= FORM ================= -->
 <div class="card form-card">
-    <form method="POST" action="/add_akun" class="form-row">
+<form method="POST" action="/add_akun" class="form-row">
 
-        <input name="gmail" placeholder="Gmail">
-        <input name="twitter" placeholder="Twitter">
-        <input name="telegram" placeholder="Telegram">
-        <input name="discord" placeholder="Discord">
-        <input name="github" placeholder="Github">
+<input name="gmail" placeholder="Gmail">
+<input name="twitter" placeholder="Twitter">
+<input name="telegram" placeholder="Telegram">
+<input name="discord" placeholder="Discord">
+<input name="github" placeholder="Github">
 
-        <button class="btn">ADD</button>
+<button class="btn">ADD</button>
 
-    </form>
+</form>
 </div>
 
 <hr class="divider">
 
-<!-- ================= GRID 2 KOLOM ================= -->
+
+<!-- ================= GRID ================= -->
+
 <div class="airdrop-grid">
 
 {% for item in data %}
+
 <div class="airdrop-card">
 
-    <!-- HEADER -->
-    <div class="card-header">
-        <span class="title">ACCOUNT #{{ loop.index }}</span>
-    </div>
+<!-- HEADER -->
 
-    <hr>
+<div class="card-header">
+<span class="title">ACCOUNT #{{ loop.index }}</span>
+</div>
 
-    <!-- BODY -->
-    <div class="card-body">
+<hr>
 
-        <div class="wallet-row">
-            <span class="label">📧 Gmail</span>
-            <span>
-                {{ item.gmail or '-' }}
-                {% if item.gmail %}
-                <button class="copy-btn" onclick="copy('{{ item.gmail }}')">COPY</button>
-                {% endif %}
-            </span>
-        </div>
 
-        <div class="wallet-row">
-            <span class="label">🐦 Twitter</span>
-            <span>
-                {{ item.twitter or '-' }}
-                {% if item.twitter %}
-                <button class="copy-btn" onclick="copy('{{ item.twitter }}')">COPY</button>
-                {% endif %}
-            </span>
-        </div>
+<!-- BODY -->
 
-        <div class="wallet-row">
-            <span class="label">💬 Telegram</span>
-            <span>
-                {{ item.telegram or '-' }}
-                {% if item.telegram %}
-                <button class="copy-btn" onclick="copy('{{ item.telegram }}')">COPY</button>
-                {% endif %}
-            </span>
-        </div>
+<div class="card-body">
 
-        <div class="wallet-row">
-            <span class="label">🎮 Discord</span>
-            <span>
-                {{ item.discord or '-' }}
-                {% if item.discord %}
-                <button class="copy-btn" onclick="copy('{{ item.discord }}')">COPY</button>
-                {% endif %}
-            </span>
-        </div>
 
-        <div class="wallet-row">
-            <span class="label">💻 Github</span>
-            <span>
-                {{ item.github or '-' }}
-                {% if item.github %}
-                <button class="copy-btn" onclick="copy('{{ item.github }}')">COPY</button>
-                {% endif %}
-            </span>
-        </div>
+<!-- Gmail -->
 
-    </div>
+<div class="wallet-row">
 
-    <!-- ACTION -->
-    <div class="card-actions" style="margin-top:15px;">
-        <a class="btn danger" href="/delete_akun/{{item.id}}">DELETE</a>
-        <a class="btn" href="/edit_akun/{{item.id}}">EDIT</a>
-    </div>
+<span class="label">📧 Gmail</span>
+
+<span class="value">
+{{ item.gmail or '-' }}
+</span>
+
+{% if item.gmail %}
+<button class="copy-btn" onclick="copy('{{ item.gmail }}')">
+📋
+</button>
+{% endif %}
 
 </div>
+
+
+<!-- Twitter -->
+
+<div class="wallet-row">
+
+<span class="label">🐦 Twitter</span>
+
+<span class="value">
+{{ item.twitter or '-' }}
+</span>
+
+{% if item.twitter %}
+<button class="copy-btn" onclick="copy('{{ item.twitter }}')">
+📋
+</button>
+{% endif %}
+
+</div>
+
+
+<!-- Telegram -->
+
+<div class="wallet-row">
+
+<span class="label">💬 Telegram</span>
+
+<span class="value">
+{{ item.telegram or '-' }}
+</span>
+
+{% if item.telegram %}
+<button class="copy-btn" onclick="copy('{{ item.telegram }}')">
+📋
+</button>
+{% endif %}
+
+</div>
+
+
+<!-- Discord -->
+
+<div class="wallet-row">
+
+<span class="label">🎮 Discord</span>
+
+<span class="value">
+{{ item.discord or '-' }}
+</span>
+
+{% if item.discord %}
+<button class="copy-btn" onclick="copy('{{ item.discord }}')">
+📋
+</button>
+{% endif %}
+
+</div>
+
+
+<!-- Github -->
+
+<div class="wallet-row">
+
+<span class="label">💻 Github</span>
+
+<span class="value">
+{{ item.github or '-' }}
+</span>
+
+{% if item.github %}
+<button class="copy-btn" onclick="copy('{{ item.github }}')">
+📋
+</button>
+{% endif %}
+
+</div>
+
+
+</div>
+
+
+<!-- ACTION -->
+
+<div class="card-actions" style="margin-top:15px;">
+
+<a class="btn danger" href="/delete_akun/{{item.id}}">
+DELETE
+</a>
+
+<a class="btn" href="/edit_akun/{{item.id}}">
+EDIT
+</a>
+
+</div>
+
+</div>
+
 {% endfor %}
 
 </div>
+
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+function copy(text){
+
+navigator.clipboard.writeText(text)
+
+let toast=document.createElement("div")
+
+toast.className="copy-toast"
+
+toast.innerText="Copied!"
+
+document.body.appendChild(toast)
+
+setTimeout(()=>toast.remove(),1000)
+
+}
+
+</script>
 
 {% endblock %}
