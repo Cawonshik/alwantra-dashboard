@@ -14,7 +14,12 @@ def _get_all_cached():
         return []
 
     headers = rows[0]
-    return [dict(zip(headers, row)) for row in rows[1:]]
+
+    return [
+        {k: (v.strip() if isinstance(v, str) else v)
+         for k, v in dict(zip(headers, row)).items()}
+        for row in rows[1:]
+    ]
 
 
 # ================= GET ALL =================
@@ -52,7 +57,7 @@ def add(data, user_id):
         data.get("github", "")
     ])
 
-    _get_all_cached.cache_clear()  # reset cache
+    _get_all_cached.cache_clear()
 
 
 # ================= DELETE =================
@@ -68,7 +73,7 @@ def delete(id, user_id):
             sheet.delete_rows(i)
             break
 
-    _get_all_cached.cache_clear()  # reset cache
+    _get_all_cached.cache_clear()
 
 
 # ================= UPDATE =================
@@ -90,4 +95,4 @@ def update(id, data, user_id):
             ]])
             break
 
-    _get_all_cached.cache_clear()  # reset cache
+    _get_all_cached.cache_clear()
