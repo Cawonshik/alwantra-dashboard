@@ -1,106 +1,201 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="page-title">Dashboard</h1>
+<div class="space-y-8">
+
+<!-- ================= TITLE ================= -->
+
+<h1 class="text-2xl md:text-3xl font-semibold text-white">
+Dashboard
+</h1>
+
 
 <!-- ================= STATS ================= -->
-<div class="stats-row">
 
-    <div class="stat-card">
-        <span>Total</span>
-        <h2>{{ total }}</h2>
-    </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-    <div class="stat-card">
-        <span>Done</span>
-        <h2>{{ done }}</h2>
-    </div>
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl text-center">
+<p class="text-gray-400">Total</p>
+<h2 class="text-3xl font-bold text-cyan-400">{{ total }}</h2>
+</div>
 
-    <div class="stat-card">
-        <span>Pending</span>
-        <h2>{{ pending }}</h2>
-    </div>
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl text-center">
+<p class="text-gray-400">Done</p>
+<h2 class="text-3xl font-bold text-green-400">{{ done }}</h2>
+</div>
+
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl text-center">
+<p class="text-gray-400">Pending</p>
+<h2 class="text-3xl font-bold text-yellow-400">{{ pending }}</h2>
+</div>
 
 </div>
+
 
 <!-- ================= FORM ================= -->
-<div class="card form-card">
-    <form method="POST" action="/add_airdrop" class="form-row">
 
-        <input name="name" placeholder="Airdrop Name" required>
-        <input name="type" placeholder="Type (Testnet / Social)">
-        <input name="chain" placeholder="Chain (EVM / SOL)">
-        <input name="wallet" placeholder="Wallet">
-        <input name="channel" placeholder="Channel Link">
-        <input name="note" placeholder="Note">
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl">
 
-        <button type="submit" class="btn">ADD</button>
+<form method="POST" action="/add_airdrop"
+class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-3">
 
-    </form>
+<input name="name" placeholder="Airdrop Name"
+class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
+
+<input name="type" placeholder="Type"
+class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
+
+<input name="chain" placeholder="Chain"
+class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
+
+<input name="wallet" placeholder="Wallet"
+class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
+
+<input name="channel" placeholder="Channel"
+class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
+
+<input name="note" placeholder="Note"
+class="bg-black border border-gray-700 rounded px-3 py-2 text-white">
+
+<button class="bg-cyan-500 hover:bg-cyan-400 text-black rounded font-semibold py-2">
+Add
+</button>
+
+</form>
+
 </div>
 
-<!-- ================= AIRDROP GRID ================= -->
-<div class="airdrop-grid">
+
+<!-- ================= AIRDROP LIST ================= -->
+
+<div class="space-y-4">
 
 {% for item in data %}
-<div class="airdrop-card">
 
-    <!-- HEADER -->
-    <div class="card-top">
-        <div class="card-title">
-            {{ item.name or '-' }}
-        </div>
+<div class="bg-[#0d1424] border border-gray-800 rounded-xl p-6">
 
-        <span class="status {{ item.status }}">
-            {{ item.status }}
-        </span>
-    </div>
+<div class="grid grid-cols-1 md:grid-cols-[2fr,1fr,1fr,1fr,1fr,1fr,2fr] items-center gap-6">
 
-    <div class="card-divider"></div>
 
-    <!-- BODY -->
-    <div class="card-body">
-        <p>Type: {{ item.type or '-' }}</p>
-        <p>Chain: {{ item.chain or '-' }}</p>
-        <p>Wallet: {{ item.wallet or '-' }}</p>
+<!-- PROJECT -->
 
-        <p>
-            Channel:
-            {% if item.channel %}
-                <a href="{{ item.channel }}" target="_blank">OPEN</a>
-            {% else %}
-                -
-            {% endif %}
-        </p>
+<div class="flex items-center gap-3">
 
-        <p>Note: {{ item.note or '-' }}</p>
-        <p>Date: {{ item.date or '-' }}</p>
-    </div>
+<div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center">
+🚀
+</div>
 
-    <!-- ACTION -->
-    <div class="card-actions">
+<div>
 
-        {% if item.status != "done" %}
-        <a class="btn small" href="/done_airdrop/{{ item.id }}">
-            DONE
-        </a>
-        {% endif %}
+<p class="text-white font-semibold">
+{{ item["name"] or "-" }}
+</p>
 
-        <a class="btn small danger"
-           href="/delete_airdrop/{{ item.id }}"
-           onclick="return confirm('Delete this airdrop?')">
-           DELETE
-        </a>
-
-        <a class="btn small"
-           href="/edit_airdrop/{{ item.id }}">
-           EDIT
-        </a>
-
-    </div>
+<p class="text-gray-400 text-sm">
+{{ item["chain"] or "-" }} • {{ item["type"] or "-" }}
+</p>
 
 </div>
+
+</div>
+
+
+<!-- WALLET -->
+
+<div class="text-gray-300 text-sm">
+<span class="text-gray-500">Wallet</span><br>
+{{ item["wallet"] or "-" }}
+</div>
+
+
+<!-- CHANNEL -->
+
+<div class="text-sm">
+
+<span class="text-gray-500">Channel</span><br>
+
+{% if item["channel"] %}
+<a href="{{ item['channel'] }}" target="_blank"
+class="text-cyan-400 hover:underline">
+OPEN
+</a>
+{% else %}
+-
+{% endif %}
+
+</div>
+
+
+<!-- NOTE -->
+
+<div class="text-gray-300 text-sm">
+<span class="text-gray-500">Note</span><br>
+{{ item["note"] or "-" }}
+</div>
+
+
+<!-- DATE -->
+
+<div class="text-gray-400 text-sm">
+<span class="text-gray-500">Date</span><br>
+{{ item["date"] or "-" }}
+</div>
+
+
+<!-- STATUS -->
+
+<div>
+
+{% if item["status"] == "done" %}
+
+<span class="bg-green-600 text-white px-3 py-1 rounded text-sm whitespace-nowrap">
+Done
+</span>
+
+{% else %}
+
+<span class="bg-yellow-500 text-black px-3 py-1 rounded text-sm whitespace-nowrap">
+Pending
+</span>
+
+{% endif %}
+
+</div>
+
+
+<!-- ACTION -->
+
+<div class="flex gap-2 justify-end flex-nowrap">
+
+{% if item["status"] != "done" %}
+
+<a href="/done_airdrop/{{ item['id'] }}"
+class="bg-green-600 hover:bg-green-500 px-3 py-1 rounded text-sm whitespace-nowrap">
+Done
+</a>
+
+{% endif %}
+
+<a href="/edit_airdrop/{{ item['id'] }}"
+class="bg-blue-600 hover:bg-blue-500 px-3 py-1 rounded text-sm whitespace-nowrap">
+Edit
+</a>
+
+<a href="/delete_airdrop/{{ item['id'] }}"
+onclick="return confirm('Delete this airdrop?')"
+class="bg-red-600 hover:bg-red-500 px-3 py-1 rounded text-sm whitespace-nowrap">
+Delete
+</a>
+
+</div>
+
+</div>
+
+</div>
+
 {% endfor %}
+
+</div>
 
 </div>
 

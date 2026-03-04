@@ -1,91 +1,146 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ALWANTRA DASHBOARD</title>
 
-    <!-- Futuristic Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+<title>ALWANTRA DASHBOARD</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
+
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- CHART -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
-<body>
 
-<!-- ================= BACKGROUND LAYERS ================= -->
-<div class="bg-grid"></div>
-<div class="bg-glow"></div>
+<body class="bg-black text-white font-[Orbitron]">
+
+<!-- ================= BACKGROUND ================= -->
+
+<div class="fixed inset-0 bg-[radial-gradient(circle_at_top,#00111f,#000000)] -z-10"></div>
 
 <!-- ================= HEADER ================= -->
-<div class="top-header">
 
-    <div class="logo">
-        🚀 ALWANTRA DASHBOARD
-    </div>
+{% if current_user.is_authenticated %}
 
-    {% if current_user.is_authenticated %}
+<header class="border-b border-gray-800 bg-black/70 backdrop-blur">
 
-    <div class="nav-wrapper">
+<div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-        <!-- MENU -->
-        <div class="menu">
-            <a href="/">AIRDROP</a>
-            <a href="/akun">AKUN</a>
-            <a href="/address">ADDRESS</a>
-        </div>
+<div class="text-cyan-400 font-bold text-xl">
+🚀 ALWANTRA
+</div>
 
-        <!-- ACTIONS -->
-        <div class="top-actions">
-            <input id="search" placeholder="search..." onkeyup="search()">
-            <a href="/export_airdrop" class="btn">Export CSV</a>
-            <a href="/logout" class="btn">Logout</a>
-        </div>
+<nav class="flex items-center gap-6 text-sm">
 
-    </div>
+<a href="/" class="hover:text-cyan-400">
+AIRDROP
+</a>
 
-    {% endif %}
+<a href="/akun" class="hover:text-cyan-400">
+AKUN
+</a>
+
+<a href="/address" class="hover:text-cyan-400">
+ADDRESS
+</a>
+
+</nav>
+
+<div class="flex items-center gap-3">
+
+<input
+id="search"
+placeholder="search..."
+onkeyup="search()"
+class="bg-black border border-gray-700 rounded-lg px-3 py-1 text-sm"
+/>
+
+<a href="/export_airdrop"
+class="border border-gray-700 px-3 py-1 rounded-lg hover:border-cyan-400 text-sm">
+Export
+</a>
+
+<a href="/logout"
+class="border border-red-500 px-3 py-1 rounded-lg hover:bg-red-500 text-sm">
+Logout
+</a>
 
 </div>
 
-<!-- ================= MAIN CONTENT ================= -->
-<div class="container">
+</div>
 
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="flash">
-          {% for message in messages %}
-            <p>{{ message }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+</header>
 
-    {% block content %}{% endblock %}
+{% endif %}
+
+<!-- ================= CONTENT ================= -->
+
+<main class="max-w-7xl mx-auto px-6 py-8">
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+
+<div class="bg-red-900 border border-red-500 p-4 rounded mb-6">
+
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
 
 </div>
+
+{% endif %}
+{% endwith %}
+
+{% block content %}{% endblock %}
+
+</main>
+
 
 <!-- ================= SCRIPT ================= -->
-<script>
-function search() {
-    const input = document.getElementById("search").value.toLowerCase();
-    const cards = document.querySelectorAll(".airdrop-card, .wallet-card");
 
-    cards.forEach(card => {
-        const match = card.innerText.toLowerCase().includes(input);
-        card.style.display = match ? "" : "none";
-    });
+<script>
+
+function search(){
+
+const input = document.getElementById("search").value.toLowerCase()
+
+const cards = document.querySelectorAll(".airdrop-card, .wallet-card")
+
+cards.forEach(card => {
+
+const match = card.innerText.toLowerCase().includes(input)
+
+card.style.display = match ? "" : "none"
+
+})
+
 }
 
 function copy(text){
-    navigator.clipboard.writeText(text);
+
+navigator.clipboard.writeText(text)
+
+alert("Copied: " + text)
+
 }
 
 function scan(addr){
-    window.open("https://etherscan.io/address/" + addr, "_blank");
+
+window.open("https://etherscan.io/address/" + addr, "_blank")
+
 }
+
 </script>
+
 
 </body>
 </html>

@@ -1,16 +1,69 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="auth-card">
-<h2>Register</h2>
+<div class="flex items-center justify-center min-h-screen">
 
-<form method="POST">
-    <input name="username" placeholder="Username">
-    <input name="password" type="password" placeholder="Password">
-    <button>Register</button>
+<div class="w-full max-w-md bg-[#0b0f1a] border border-gray-800 rounded-xl p-8 shadow-lg">
+
+<h2 class="text-3xl font-bold text-center mb-6 text-cyan-400">
+Register
+</h2>
+
+<form method="POST" class="space-y-4">
+
+<input
+name="username"
+placeholder="Username"
+required
+class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-400 outline-none"
+/>
+
+<input
+name="password"
+type="password"
+placeholder="Password"
+required
+class="w-full bg-black border border-gray-700 rounded-lg p-3 text-white focus:border-cyan-400 outline-none"
+/>
+
+<button
+class="w-full bg-cyan-400 text-black font-semibold py-3 rounded-lg hover:bg-cyan-300 transition">
+Register
+</button>
+
 </form>
 
-<p>Sudah punya akun? <a href="/login">Login</a></p>
+<div class="flex items-center my-6">
+<div class="flex-1 border-t border-gray-700"></div>
+<span class="px-3 text-gray-400 text-sm">atau</span>
+<div class="flex-1 border-t border-gray-700"></div>
+</div>
+
+<div class="flex flex-col gap-3">
+
+<a href="/login/google"
+class="text-center border border-gray-700 py-2 rounded-lg hover:border-cyan-400">
+Register dengan Google
+</a>
+
+<script async src="https://telegram.org/js/telegram-widget.js?22"
+data-telegram-login="USERNAME_BOT_KAMU"
+data-size="large"
+data-userpic="false"
+data-auth-url="/telegram_login">
+</script>
+
+</div>
+
+<p class="text-center text-gray-400 mt-6">
+Sudah punya akun?
+<a href="/login" class="text-cyan-400 hover:underline">
+Login
+</a>
+</p>
+
+</div>
+
 </div>
 
 {% endblock %}
