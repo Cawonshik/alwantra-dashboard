@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>ALWANTRA DASHBOARD</title>
@@ -23,9 +24,12 @@
 
 <body class="bg-black text-white font-[Orbitron]">
 
+
 <!-- ================= BACKGROUND ================= -->
 
 <div class="fixed inset-0 bg-[radial-gradient(circle_at_top,#00111f,#000000)] -z-10"></div>
+
+
 
 <!-- ================= HEADER ================= -->
 
@@ -33,13 +37,18 @@
 
 <header class="border-b border-gray-800 bg-black/70 backdrop-blur">
 
-<div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+<div class="max-w-7xl mx-auto px-6 py-4">
 
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+<!-- LOGO -->
 <div class="text-cyan-400 font-bold text-xl">
 🚀 ALWANTRA
 </div>
 
-<nav class="flex items-center gap-6 text-sm">
+
+<!-- MENU -->
+<nav class="flex flex-wrap gap-4 text-sm">
 
 <a href="/" class="hover:text-cyan-400">
 AIRDROP
@@ -55,13 +64,15 @@ ADDRESS
 
 </nav>
 
-<div class="flex items-center gap-3">
+
+<!-- ACTIONS -->
+<div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
 
 <input
 id="search"
 placeholder="search..."
 onkeyup="search()"
-class="bg-black border border-gray-700 rounded-lg px-3 py-1 text-sm"
+class="bg-black border border-gray-700 rounded-lg px-3 py-1 text-sm w-full md:w-40"
 />
 
 <a href="/export_airdrop"
@@ -78,9 +89,13 @@ Logout
 
 </div>
 
+</div>
+
 </header>
 
 {% endif %}
+
+
 
 <!-- ================= CONTENT ================= -->
 
@@ -105,6 +120,7 @@ Logout
 </main>
 
 
+
 <!-- ================= SCRIPT ================= -->
 
 <script>
@@ -125,6 +141,7 @@ card.style.display = match ? "" : "none"
 
 }
 
+
 function copy(text){
 
 navigator.clipboard.writeText(text)
@@ -132,6 +149,7 @@ navigator.clipboard.writeText(text)
 alert("Copied: " + text)
 
 }
+
 
 function scan(addr){
 
