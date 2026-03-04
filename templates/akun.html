@@ -38,27 +38,52 @@
 
         <div class="wallet-row">
             <span class="label">📧 Gmail</span>
-            <span>{{ item.gmail or '-' }}</span>
+            <span>
+                {{ item.gmail or '-' }}
+                {% if item.gmail %}
+                <button class="copy-btn" onclick="copy('{{ item.gmail }}')">COPY</button>
+                {% endif %}
+            </span>
         </div>
 
         <div class="wallet-row">
             <span class="label">🐦 Twitter</span>
-            <span>{{ item.twitter or '-' }}</span>
+            <span>
+                {{ item.twitter or '-' }}
+                {% if item.twitter %}
+                <button class="copy-btn" onclick="copy('{{ item.twitter }}')">COPY</button>
+                {% endif %}
+            </span>
         </div>
 
         <div class="wallet-row">
             <span class="label">💬 Telegram</span>
-            <span>{{ item.telegram or '-' }}</span>
+            <span>
+                {{ item.telegram or '-' }}
+                {% if item.telegram %}
+                <button class="copy-btn" onclick="copy('{{ item.telegram }}')">COPY</button>
+                {% endif %}
+            </span>
         </div>
 
         <div class="wallet-row">
             <span class="label">🎮 Discord</span>
-            <span>{{ item.discord or '-' }}</span>
+            <span>
+                {{ item.discord or '-' }}
+                {% if item.discord %}
+                <button class="copy-btn" onclick="copy('{{ item.discord }}')">COPY</button>
+                {% endif %}
+            </span>
         </div>
 
         <div class="wallet-row">
             <span class="label">💻 Github</span>
-            <span>{{ item.github or '-' }}</span>
+            <span>
+                {{ item.github or '-' }}
+                {% if item.github %}
+                <button class="copy-btn" onclick="copy('{{ item.github }}')">COPY</button>
+                {% endif %}
+            </span>
         </div>
 
     </div>
