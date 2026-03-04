@@ -46,8 +46,9 @@
             {% if item.evm %}
                 {% set evm = item.evm|string %}
                 {{ evm[:6] }}...{{ evm[-4:] }}
-                <button class="btn small" onclick="copy('{{evm}}')">📋</button>
-                <button class="btn small" onclick="scan('{{evm}}')">SCAN</button>
+
+                <button class="btn small" onclick="copyAddress('{{evm}}')">📋</button>
+                <button class="btn small" onclick="scanEvm('{{evm}}')">SCAN</button>
             {% else %}
                 -
             {% endif %}
@@ -59,7 +60,9 @@
             {% if item.sol %}
                 {% set sol = item.sol|string %}
                 {{ sol[:6] }}...{{ sol[-4:] }}
-                <button class="btn small" onclick="copy('{{sol}}')">📋</button>
+
+                <button class="btn small" onclick="copyAddress('{{sol}}')">📋</button>
+                <button class="btn small" onclick="scanSol('{{sol}}')">SCAN</button>
             {% else %}
                 -
             {% endif %}
@@ -71,7 +74,9 @@
             {% if item.sui %}
                 {% set sui = item.sui|string %}
                 {{ sui[:6] }}...{{ sui[-4:] }}
-                <button class="btn small" onclick="copy('{{sui}}')">📋</button>
+
+                <button class="btn small" onclick="copyAddress('{{sui}}')">📋</button>
+                <button class="btn small" onclick="scanSui('{{sui}}')">SCAN</button>
             {% else %}
                 -
             {% endif %}
@@ -95,31 +100,52 @@
 
 <!-- ================= SCRIPT ================= -->
 <script>
-function copy(text){
-    if(!text) return;
-    navigator.clipboard.writeText(text);
-    toast("Copied!");
+
+function copyAddress(text){
+    if(!text) return
+    navigator.clipboard.writeText(text)
+    toast("Copied!")
 }
 
-function scan(addr){
-    if(!addr) return;
-    window.open("https://etherscan.io/address/" + addr, "_blank");
+function scanEvm(addr){
+    window.open(
+        "https://etherscan.io/address/" + addr,
+        "_blank"
+    )
+}
+
+function scanSol(addr){
+    window.open(
+        "https://solscan.io/account/" + addr,
+        "_blank"
+    )
+}
+
+function scanSui(addr){
+    window.open(
+        "https://suiexplorer.com/address/" + addr,
+        "_blank"
+    )
 }
 
 function toast(msg){
-    let el = document.createElement("div");
-    el.innerText = msg;
-    el.style.position = "fixed";
-    el.style.bottom = "20px";
-    el.style.right = "20px";
-    el.style.background = "#00ffe0";
-    el.style.color = "black";
-    el.style.padding = "8px 12px";
-    el.style.borderRadius = "6px";
-    el.style.boxShadow = "0 0 10px #00ffe0";
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(), 1000);
+    let el = document.createElement("div")
+    el.innerText = msg
+
+    el.style.position = "fixed"
+    el.style.bottom = "20px"
+    el.style.right = "20px"
+    el.style.background = "#00ffe0"
+    el.style.color = "black"
+    el.style.padding = "8px 12px"
+    el.style.borderRadius = "6px"
+    el.style.boxShadow = "0 0 10px #00ffe0"
+
+    document.body.appendChild(el)
+
+    setTimeout(()=>el.remove(),1000)
 }
+
 </script>
 
 {% endblock %}
