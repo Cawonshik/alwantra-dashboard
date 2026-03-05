@@ -1,112 +1,210 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="page-title">ADDRESS</h1>
+<h1 class="text-3xl text-cyan-400 mb-10 font-bold">
+ADDRESS
+</h1>
 
 <!-- ================= STATS ================= -->
-<div class="stats-row">
-    <div class="stat-card">
-        <span>Total Wallet</span>
-        <h2>{{ data|length }}</h2>
-    </div>
+
+<div class="grid md:grid-cols-3 gap-6 mb-10">
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+
+<p class="text-sm text-gray-400 mb-2">
+Total Wallet
+</p>
+
+<h2 class="text-3xl text-cyan-400 font-bold">
+{{ data|length }}
+</h2>
+
 </div>
+
+</div>
+
 
 <!-- ================= FORM ================= -->
-<div class="card form-card">
-    <form method="POST" action="/add_address" class="form-row">
-        <input name="nomor" placeholder="Nomor">
-        <input name="evm" placeholder="EVM Address">
-        <input name="sol" placeholder="SOL Address">
-        <input name="sui" placeholder="SUI Address">
-        <button class="btn">ADD</button>
-    </form>
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 mb-10">
+
+<form method="POST" action="/add_address" class="grid md:grid-cols-4 gap-4">
+
+<input
+name="nomor"
+placeholder="Nomor"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="evm"
+placeholder="EVM Address"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="sol"
+placeholder="SOL Address"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="sui"
+placeholder="SUI Address"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<button
+class="border border-cyan-400 text-cyan-400 px-4 py-2 rounded-lg hover:bg-cyan-400 hover:text-black col-span-full w-32">
+ADD
+</button>
+
+</form>
+
 </div>
+
 
 <!-- ================= GRID ================= -->
-<div class="address-grid">
+
+<div class="grid md:grid-cols-2 gap-6">
 
 {% for item in data %}
-<div class="wallet-card">
+
+<div class="bg-[#061321] border border-cyan-400/20 rounded-xl p-6 flex flex-col gap-4 hover:shadow-[0_0_20px_rgba(0,255,224,0.25)] transition">
 
 <!-- HEADER -->
-<div class="card-top">
-<div class="card-title">
+
+<div class="flex justify-between items-center">
+
+<span class="text-cyan-400 font-semibold">
 Wallet {{ item.nomor }}
-</div>
+</span>
+
 </div>
 
-<div class="card-divider"></div>
+<hr class="border-gray-700">
+
 
 <!-- BODY -->
-<div class="card-body">
+
+<div class="flex flex-col gap-3 text-sm">
+
 
 <!-- ================= EVM ================= -->
-<div class="wallet-row">
 
-<span class="label">EVM</span>
+<div class="grid grid-cols-[120px_1fr_auto] items-center gap-3">
+
+<span class="opacity-70">
+EVM
+</span>
 
 {% if item.evm %}
 {% set evm = item.evm|string %}
 
-<span class="value">
+<span class="font-mono break-all">
 {{ evm[:6] }}...{{ evm[-4:] }}
 </span>
 
-<div class="wallet-actions">
-<button class="copy-btn" onclick="copyAddress('{{evm}}')">📋</button>
-<button class="scan-btn" onclick="scanEvm('{{evm}}')">🔎</button>
+<div class="flex gap-2">
+
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copyAddress('{{evm}}')">
+📋
+</button>
+
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="scanEvm('{{evm}}')">
+🔎
+</button>
+
 </div>
 
 {% else %}
-<span class="value">-</span>
+
+<span>-</span>
+
 {% endif %}
 
 </div>
 
 
 <!-- ================= SOL ================= -->
-<div class="wallet-row">
 
-<span class="label">SOL</span>
+<div class="grid grid-cols-[120px_1fr_auto] items-center gap-3">
+
+<span class="opacity-70">
+SOL
+</span>
 
 {% if item.sol %}
 {% set sol = item.sol|string %}
 
-<span class="value">
+<span class="font-mono break-all">
 {{ sol[:6] }}...{{ sol[-4:] }}
 </span>
 
-<div class="wallet-actions">
-<button class="copy-btn" onclick="copyAddress('{{sol}}')">📋</button>
-<button class="scan-btn" onclick="scanSol('{{sol}}')">🔎</button>
+<div class="flex gap-2">
+
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copyAddress('{{sol}}')">
+📋
+</button>
+
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="scanSol('{{sol}}')">
+🔎
+</button>
+
 </div>
 
 {% else %}
-<span class="value">-</span>
+
+<span>-</span>
+
 {% endif %}
 
 </div>
 
 
 <!-- ================= SUI ================= -->
-<div class="wallet-row">
 
-<span class="label">SUI</span>
+<div class="grid grid-cols-[120px_1fr_auto] items-center gap-3">
+
+<span class="opacity-70">
+SUI
+</span>
 
 {% if item.sui %}
 {% set sui = item.sui|string %}
 
-<span class="value">
+<span class="font-mono break-all">
 {{ sui[:6] }}...{{ sui[-4:] }}
 </span>
 
-<div class="wallet-actions">
-<button class="copy-btn" onclick="copyAddress('{{sui}}')">📋</button>
-<button class="scan-btn" onclick="scanSui('{{sui}}')">🔎</button>
+<div class="flex gap-2">
+
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copyAddress('{{sui}}')">
+📋
+</button>
+
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="scanSui('{{sui}}')">
+🔎
+</button>
+
 </div>
 
 {% else %}
-<span class="value">-</span>
+
+<span>-</span>
+
 {% endif %}
 
 </div>
@@ -115,9 +213,11 @@ Wallet {{ item.nomor }}
 
 
 <!-- ACTION -->
-<div class="card-actions">
 
-<a class="btn small danger"
+<div class="mt-4">
+
+<a
+class="border border-red-500 text-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-black text-sm"
 href="/delete_address/{{ item.id }}"
 onclick="return confirm('Delete this wallet?')">
 DELETE
@@ -126,11 +226,14 @@ DELETE
 </div>
 
 </div>
+
 {% endfor %}
 
 </div>
 
+
 <!-- ================= SCRIPT ================= -->
+
 <script>
 
 function copyAddress(text){
@@ -154,16 +257,10 @@ window.open("https://suiexplorer.com/address/" + addr,"_blank")
 function toast(msg){
 
 let el=document.createElement("div")
+
 el.innerText=msg
 
-el.style.position="fixed"
-el.style.bottom="20px"
-el.style.right="20px"
-el.style.background="#00ffe0"
-el.style.color="black"
-el.style.padding="8px 12px"
-el.style.borderRadius="6px"
-el.style.boxShadow="0 0 10px #00ffe0"
+el.className="fixed bottom-5 right-5 bg-cyan-400 text-black px-3 py-1 rounded shadow-lg"
 
 document.body.appendChild(el)
 

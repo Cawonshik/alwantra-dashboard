@@ -1,60 +1,95 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="page-title">AKUN AIRDROP</h1>
+<h1 class="text-3xl text-cyan-400 mb-10 font-bold">
+AKUN AIRDROP
+</h1>
+
 
 <!-- ================= FORM ================= -->
-<div class="card form-card">
-<form method="POST" action="/add_akun" class="form-row">
 
-<input name="gmail" placeholder="Gmail">
-<input name="twitter" placeholder="Twitter">
-<input name="telegram" placeholder="Telegram">
-<input name="discord" placeholder="Discord">
-<input name="github" placeholder="Github">
+<div class="bg-black border border-gray-800 rounded-xl p-6 mb-10">
 
-<button class="btn">ADD</button>
+<form method="POST" action="/add_akun" class="grid md:grid-cols-5 gap-4">
+
+<input
+name="gmail"
+placeholder="Gmail"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="twitter"
+placeholder="Twitter"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="telegram"
+placeholder="Telegram"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="discord"
+placeholder="Discord"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<input
+name="github"
+placeholder="Github"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
+/>
+
+<button
+class="border border-cyan-400 text-cyan-400 px-4 py-2 rounded-lg hover:bg-cyan-400 hover:text-black col-span-full w-32">
+ADD
+</button>
 
 </form>
-</div>
 
-<hr class="divider">
+</div>
 
 
 <!-- ================= GRID ================= -->
 
-<div class="airdrop-grid">
+<div class="grid md:grid-cols-2 gap-6">
 
 {% for item in data %}
 
-<div class="airdrop-card">
+<div class="bg-[#061321] border border-cyan-400/20 rounded-xl p-6 flex flex-col gap-4 hover:shadow-[0_0_20px_rgba(0,255,224,0.25)] transition">
 
 <!-- HEADER -->
 
-<div class="card-header">
-<span class="title">ACCOUNT #{{ loop.index }}</span>
-</div>
+<div class="flex justify-between items-center">
 
-<hr>
+<span class="text-cyan-400 font-semibold">
+ACCOUNT #{{ loop.index }}
+</span>
+
+</div>
 
 
 <!-- BODY -->
 
-<div class="card-body">
+<div class="flex flex-col gap-3 text-sm">
 
 
 <!-- Gmail -->
 
-<div class="wallet-row">
+<div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
-<span class="label">📧 Gmail</span>
+<span class="opacity-70">📧 Gmail</span>
 
-<span class="value">
+<span class="font-mono break-all">
 {{ item.gmail or '-' }}
 </span>
 
 {% if item.gmail %}
-<button class="copy-btn" onclick="copy('{{ item.gmail }}')">
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ item.gmail }}')">
 📋
 </button>
 {% endif %}
@@ -64,16 +99,18 @@
 
 <!-- Twitter -->
 
-<div class="wallet-row">
+<div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
-<span class="label">🐦 Twitter</span>
+<span class="opacity-70">🐦 Twitter</span>
 
-<span class="value">
+<span class="font-mono break-all">
 {{ item.twitter or '-' }}
 </span>
 
 {% if item.twitter %}
-<button class="copy-btn" onclick="copy('{{ item.twitter }}')">
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ item.twitter }}')">
 📋
 </button>
 {% endif %}
@@ -83,16 +120,18 @@
 
 <!-- Telegram -->
 
-<div class="wallet-row">
+<div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
-<span class="label">💬 Telegram</span>
+<span class="opacity-70">💬 Telegram</span>
 
-<span class="value">
+<span class="font-mono break-all">
 {{ item.telegram or '-' }}
 </span>
 
 {% if item.telegram %}
-<button class="copy-btn" onclick="copy('{{ item.telegram }}')">
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ item.telegram }}')">
 📋
 </button>
 {% endif %}
@@ -102,16 +141,18 @@
 
 <!-- Discord -->
 
-<div class="wallet-row">
+<div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
-<span class="label">🎮 Discord</span>
+<span class="opacity-70">🎮 Discord</span>
 
-<span class="value">
+<span class="font-mono break-all">
 {{ item.discord or '-' }}
 </span>
 
 {% if item.discord %}
-<button class="copy-btn" onclick="copy('{{ item.discord }}')">
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ item.discord }}')">
 📋
 </button>
 {% endif %}
@@ -121,35 +162,40 @@
 
 <!-- Github -->
 
-<div class="wallet-row">
+<div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
-<span class="label">💻 Github</span>
+<span class="opacity-70">💻 Github</span>
 
-<span class="value">
+<span class="font-mono break-all">
 {{ item.github or '-' }}
 </span>
 
 {% if item.github %}
-<button class="copy-btn" onclick="copy('{{ item.github }}')">
+<button
+class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ item.github }}')">
 📋
 </button>
 {% endif %}
 
 </div>
 
-
 </div>
 
 
 <!-- ACTION -->
 
-<div class="card-actions" style="margin-top:15px;">
+<div class="flex gap-3 mt-4 flex-wrap">
 
-<a class="btn danger" href="/delete_akun/{{item.id}}">
+<a
+class="border border-red-500 text-red-500 px-3 py-1 rounded hover:bg-red-500 hover:text-black text-sm"
+href="/delete_akun/{{item.id}}">
 DELETE
 </a>
 
-<a class="btn" href="/edit_akun/{{item.id}}">
+<a
+class="border border-cyan-400 text-cyan-400 px-3 py-1 rounded hover:bg-cyan-400 hover:text-black text-sm"
+href="/edit_akun/{{item.id}}">
 EDIT
 </a>
 
@@ -172,7 +218,7 @@ navigator.clipboard.writeText(text)
 
 let toast=document.createElement("div")
 
-toast.className="copy-toast"
+toast.className="fixed bottom-5 right-5 bg-cyan-400 text-black px-3 py-1 rounded shadow-lg"
 
 toast.innerText="Copied!"
 
