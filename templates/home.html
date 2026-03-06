@@ -159,6 +159,8 @@ Clean Web3 Dashboard
 
 <div id="slider" class="flex transition-transform duration-700">
 
+<img src="/static/dashboard.png" class="w-full object-contain flex-shrink-0">
+
 <img src="/static/dashboard1.png" class="w-full object-contain flex-shrink-0">
 
 <img src="/static/dashboard2.png" class="w-full object-contain flex-shrink-0">
@@ -288,7 +290,7 @@ Telegram
 
 let index = 0
 const slider = document.getElementById("slider")
-const total = 3
+const total = slider.children.length
 
 function updateSlider(){
 slider.style.transform = `translateX(-${index * 100}%)`
