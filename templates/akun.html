@@ -93,107 +93,131 @@ ACCOUNT #{{ loop.index }}
 
 <div class="flex flex-col gap-3 text-sm">
 
-
-<!-- Gmail -->
+<!-- ================= GMAIL ================= -->
 
 <div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
 <span class="opacity-70">📧 Gmail</span>
 
+{% if item.gmail %}
+{% set gmail = item.gmail|string %}
+
 <span class="font-mono break-all">
-{{ item.gmail or '-' }}
+{{ gmail[:6] }}...{{ gmail[-4:] }}
 </span>
 
-{% if item.gmail %}
 <button
 class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ item.gmail }}')">
+onclick="copy('{{ gmail }}')">
 📋
 </button>
+
+{% else %}
+<span>-</span>
 {% endif %}
 
 </div>
 
 
-<!-- Twitter -->
+<!-- ================= TWITTER ================= -->
 
 <div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
 <span class="opacity-70">🐦 Twitter</span>
 
+{% if item.twitter %}
+{% set twitter = item.twitter|string %}
+
 <span class="font-mono break-all">
-{{ item.twitter or '-' }}
+{{ twitter[:6] }}...{{ twitter[-4:] }}
 </span>
 
-{% if item.twitter %}
 <button
 class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ item.twitter }}')">
+onclick="copy('{{ twitter }}')">
 📋
 </button>
+
+{% else %}
+<span>-</span>
 {% endif %}
 
 </div>
 
 
-<!-- Telegram -->
+<!-- ================= TELEGRAM ================= -->
 
 <div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
 <span class="opacity-70">💬 Telegram</span>
 
+{% if item.telegram %}
+{% set telegram = item.telegram|string %}
+
 <span class="font-mono break-all">
-{{ item.telegram or '-' }}
+{{ telegram[:6] }}...{{ telegram[-4:] }}
 </span>
 
-{% if item.telegram %}
 <button
 class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ item.telegram }}')">
+onclick="copy('{{ telegram }}')">
 📋
 </button>
+
+{% else %}
+<span>-</span>
 {% endif %}
 
 </div>
 
 
-<!-- Discord -->
+<!-- ================= DISCORD ================= -->
 
 <div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
 <span class="opacity-70">🎮 Discord</span>
 
+{% if item.discord %}
+{% set discord = item.discord|string %}
+
 <span class="font-mono break-all">
-{{ item.discord or '-' }}
+{{ discord[:6] }}...{{ discord[-4:] }}
 </span>
 
-{% if item.discord %}
 <button
 class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ item.discord }}')">
+onclick="copy('{{ discord }}')">
 📋
 </button>
+
+{% else %}
+<span>-</span>
 {% endif %}
 
 </div>
 
 
-<!-- Github -->
+<!-- ================= GITHUB ================= -->
 
 <div class="grid grid-cols-[140px_1fr_auto] items-center gap-3">
 
 <span class="opacity-70">💻 Github</span>
 
+{% if item.github %}
+{% set github = item.github|string %}
+
 <span class="font-mono break-all">
-{{ item.github or '-' }}
+{{ github[:6] }}...{{ github[-4:] }}
 </span>
 
-{% if item.github %}
 <button
 class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ item.github }}')">
+onclick="copy('{{ github }}')">
 📋
 </button>
+
+{% else %}
+<span>-</span>
 {% endif %}
 
 </div>
@@ -231,17 +255,35 @@ Delete
 
 function copy(text){
 
+if(!text) return
+
 navigator.clipboard.writeText(text)
 
-let toast=document.createElement("div")
+toast("Copied!")
 
-toast.className="fixed bottom-5 right-5 bg-cyan-400 text-black px-3 py-1 rounded shadow-lg"
+}
 
-toast.innerText="Copied!"
+function toast(msg){
 
-document.body.appendChild(toast)
+let old=document.getElementById("toast")
 
-setTimeout(()=>toast.remove(),1000)
+if(old){
+old.remove()
+}
+
+let el=document.createElement("div")
+
+el.id="toast"
+
+el.innerText=msg
+
+el.className="fixed bottom-6 right-6 bg-cyan-400 text-black px-4 py-2 rounded-lg shadow-lg font-semibold"
+
+document.body.appendChild(el)
+
+setTimeout(()=>{
+el.remove()
+},2000)
 
 }
 

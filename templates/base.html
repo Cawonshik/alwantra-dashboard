@@ -146,9 +146,11 @@ card.style.display = match ? "" : "none"
 
 function copy(text){
 
+if(!text) return
+
 navigator.clipboard.writeText(text)
 
-alert("Copied: " + text)
+toast("Copied!")
 
 }
 
