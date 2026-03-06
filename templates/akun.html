@@ -7,7 +7,9 @@ AKUN AIRDROP
 
 <!-- ================= STATS ================= -->
 
-<div class="grid md:grid-cols-3 gap-6 mb-10">
+<div class="grid md:grid-cols-6 gap-6 mb-10">
+
+<!-- TOTAL -->
 
 <div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
 
@@ -17,6 +19,81 @@ Total Akun
 
 <h2 class="text-3xl text-cyan-400 font-bold">
 {{ data|length }}
+</h2>
+
+</div>
+
+
+<!-- GMAIL -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+
+<p class="text-sm text-gray-400 mb-2">
+📧 Gmail
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("gmail")|list|length }}
+</h2>
+
+</div>
+
+
+<!-- TWITTER -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+
+<p class="text-sm text-gray-400 mb-2">
+🐦 Twitter
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("twitter")|list|length }}
+</h2>
+
+</div>
+
+
+<!-- TELEGRAM -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+
+<p class="text-sm text-gray-400 mb-2">
+💬 Telegram
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("telegram")|list|length }}
+</h2>
+
+</div>
+
+
+<!-- DISCORD -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+
+<p class="text-sm text-gray-400 mb-2">
+🎮 Discord
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("discord")|list|length }}
+</h2>
+
+</div>
+
+
+<!-- GITHUB -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+
+<p class="text-sm text-gray-400 mb-2">
+💻 Github
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("github")|list|length }}
 </h2>
 
 </div>

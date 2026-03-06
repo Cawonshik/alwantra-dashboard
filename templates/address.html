@@ -8,9 +8,11 @@ ADDRESS
 
 <!-- ================= STATS ================= -->
 
-<div class="grid md:grid-cols-3 gap-6 mb-10">
+<div class="grid md:grid-cols-4 gap-6 mb-10">
 
-<div class="bg-black border border-gray-800 rounded-xl p-6 text-center">
+<!-- TOTAL -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center hover:border-cyan-400 transition">
 
 <p class="text-sm text-gray-400 mb-2">
 Total Wallet
@@ -18,6 +20,51 @@ Total Wallet
 
 <h2 class="text-3xl text-cyan-400 font-bold">
 {{ data|length }}
+</h2>
+
+</div>
+
+
+<!-- EVM -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center hover:border-cyan-400 transition">
+
+<p class="text-sm text-gray-400 mb-2">
+⛓ EVM
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("evm")|list|length }}
+</h2>
+
+</div>
+
+
+<!-- SOL -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center hover:border-cyan-400 transition">
+
+<p class="text-sm text-gray-400 mb-2">
+◎ SOL
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("sol")|list|length }}
+</h2>
+
+</div>
+
+
+<!-- SUI -->
+
+<div class="bg-black border border-gray-800 rounded-xl p-6 text-center hover:border-cyan-400 transition">
+
+<p class="text-sm text-gray-400 mb-2">
+💧 SUI
+</p>
+
+<h2 class="text-2xl text-cyan-400 font-bold">
+{{ data|selectattr("sui")|list|length }}
 </h2>
 
 </div>
