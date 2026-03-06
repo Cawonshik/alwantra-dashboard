@@ -24,6 +24,19 @@ Total Akun
 </div>
 
 
+<!-- ================= SEARCH ================= -->
+
+<div class="mb-6">
+
+<input
+id="search"
+placeholder="Search account..."
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-64"
+/>
+
+</div>
+
+
 <!-- ================= FORM ================= -->
 
 <div class="bg-black border border-gray-800 rounded-xl p-6 mb-10">
@@ -72,11 +85,11 @@ ADD
 
 <!-- ================= GRID ================= -->
 
-<div class="grid md:grid-cols-2 gap-6">
+<div class="grid md:grid-cols-2 gap-6" id="account-list">
 
 {% for item in data %}
 
-<div class="bg-[#061321] border border-cyan-400/20 rounded-xl p-6 flex flex-col gap-4 hover:shadow-[0_0_20px_rgba(0,255,224,0.25)] transition">
+<div class="account-card bg-[#061321] border border-cyan-400/20 rounded-xl p-6 flex flex-col gap-4 hover:shadow-[0_0_20px_rgba(0,255,224,0.25)] transition">
 
 <!-- HEADER -->
 
@@ -286,6 +299,37 @@ el.remove()
 },2000)
 
 }
+
+
+/* ================= SEARCH ================= */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+const search=document.getElementById("search")
+
+if(!search) return
+
+search.addEventListener("input", function(){
+
+const value=this.value.toLowerCase()
+
+const cards=document.querySelectorAll(".account-card")
+
+cards.forEach(function(card){
+
+const text=card.innerText.toLowerCase()
+
+if(text.includes(value)){
+card.style.display="flex"
+}else{
+card.style.display="none"
+}
+
+})
+
+})
+
+})
 
 </script>
 
