@@ -155,9 +155,35 @@ Save Gmail, Twitter, Telegram, Discord and GitHub accounts safely.
 Clean Web3 Dashboard
 </h2>
 
-<div class="border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
+<div class="relative border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
 
-<img src="/static/dashboard.png" class="w-full border border-cyan-400/20">
+<div id="slider" class="flex transition-transform duration-700">
+
+<img src="/static/dashboard.png" class="w-full flex-shrink-0">
+
+<img src="/static/dashboard2.png" class="w-full flex-shrink-0">
+
+<img src="/static/dashboard3.png" class="w-full flex-shrink-0">
+
+</div>
+
+<!-- LEFT BUTTON -->
+
+<button onclick="prevSlide()"
+class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black px-3 py-2 rounded-lg">
+
+◀
+
+</button>
+
+<!-- RIGHT BUTTON -->
+
+<button onclick="nextSlide()"
+class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black px-3 py-2 rounded-lg">
+
+▶
+
+</button>
 
 </div>
 
@@ -255,6 +281,41 @@ Telegram
 </div>
 
 </footer>
+
+<!-- SLIDER SCRIPT -->
+
+<script>
+
+let index = 0
+const slider = document.getElementById("slider")
+const total = 3
+
+function updateSlider(){
+slider.style.transform = `translateX(-${index * 100}%)`
+}
+
+function nextSlide(){
+index++
+if(index >= total){
+index = 0
+}
+updateSlider()
+}
+
+function prevSlide(){
+index--
+if(index < 0){
+index = total - 1
+}
+updateSlider()
+}
+
+setInterval(() => {
+nextSlide()
+}, 5000)
+
+</script>
+
 
 </body>
 </html>
