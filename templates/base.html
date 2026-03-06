@@ -23,7 +23,6 @@
 
 <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-<!-- SITE NAME STRUCTURED DATA -->
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -33,16 +32,12 @@
 }
 </script>
 
-<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap" rel="stylesheet">
 
-<!-- TAILWIND -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- CHART -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- CSS -->
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
@@ -51,13 +46,11 @@
 <body class="bg-black text-white font-[Orbitron]">
 
 
-<!-- ================= BACKGROUND ================= -->
+<!-- BACKGROUND -->
 
 <div class="fixed inset-0 bg-[radial-gradient(circle_at_top,#00111f,#000000)] -z-10"></div>
 
 
-
-<!-- ================= HEADER ================= -->
 
 {% if current_user.is_authenticated %}
 
@@ -67,13 +60,16 @@
 
 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
+
 <!-- LOGO -->
+
 <div class="text-cyan-400 font-bold text-xl">
 🚀 ALWANTRA
 </div>
 
 
 <!-- MENU -->
+
 <nav class="flex flex-wrap gap-4 text-sm">
 
 <a href="/" class="hover:text-cyan-400">
@@ -91,7 +87,8 @@ ADDRESS
 </nav>
 
 
-<!-- ACTIONS -->
+<!-- ACTION -->
+
 <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
 
 <input
@@ -100,6 +97,12 @@ placeholder="search..."
 onkeyup="search()"
 class="bg-black border border-gray-700 rounded-lg px-3 py-1 text-sm w-full md:w-40"
 />
+
+<button
+onclick="openSearch()"
+class="border border-gray-700 px-3 py-1 rounded-lg hover:border-cyan-400 text-sm">
+🔍
+</button>
 
 <a href="/export_airdrop"
 class="border border-gray-700 px-3 py-1 rounded-lg hover:border-cyan-400 text-sm">
@@ -123,7 +126,7 @@ Logout
 
 
 
-<!-- ================= CONTENT ================= -->
+<!-- CONTENT -->
 
 <main class="max-w-7xl mx-auto px-6 py-8">
 
@@ -147,7 +150,34 @@ Logout
 
 
 
-<!-- ================= SCRIPT ================= -->
+<!-- GLOBAL SEARCH -->
+
+<div id="searchOverlay"
+class="hidden fixed inset-0 bg-black/80 backdrop-blur z-50 flex items-start justify-center pt-32">
+
+<div class="bg-[#061321] border border-cyan-400/30 w-full max-w-xl rounded-xl p-6 relative">
+
+<button
+onclick="closeSearch()"
+class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg">
+✕
+</button>
+
+<input
+id="globalSearch"
+placeholder="Search Gmail, Twitter, Telegram, Wallet..."
+class="w-full bg-black border border-gray-700 px-4 py-3 rounded-lg text-white focus:outline-none"
+/>
+
+<div id="searchResults" class="mt-4 flex flex-col gap-2 text-sm"></div>
+
+</div>
+
+</div>
+
+
+
+<!-- SCRIPT -->
 
 <script>
 
@@ -184,6 +214,115 @@ function scan(addr){
 window.open("https://etherscan.io/address/" + addr, "_blank")
 
 }
+
+
+/* GLOBAL SEARCH */
+
+function openSearch(){
+
+document.getElementById("searchOverlay").classList.remove("hidden")
+
+document.getElementById("globalSearch").focus()
+
+}
+
+function closeSearch(){
+
+document.getElementById("searchOverlay").classList.add("hidden")
+
+document.getElementById("globalSearch").value=""
+
+document.getElementById("searchResults").innerHTML=""
+
+}
+
+
+/* CTRL + K */
+
+document.addEventListener("keydown",function(e){
+
+if(e.ctrlKey && e.key==="k"){
+
+e.preventDefault()
+
+openSearch()
+
+}
+
+if(e.key==="Escape"){
+
+closeSearch()
+
+}
+
+})
+
+
+/* LIVE SEARCH */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+const input=document.getElementById("globalSearch")
+
+if(!input) return
+
+input.addEventListener("keyup",function(){
+
+let keyword=this.value.toLowerCase()
+
+let cards=document.querySelectorAll(
+".account-card, .wallet-card, .airdrop-card"
+)
+
+let results=document.getElementById("searchResults")
+
+results.innerHTML=""
+
+cards.forEach(card=>{
+
+let text=card.innerText.toLowerCase()
+
+if(text.includes(keyword) && keyword.length>0){
+
+let item=document.createElement("div")
+
+item.className="border border-gray-700 px-3 py-2 rounded hover:bg-cyan-400/10 cursor-pointer"
+
+item.innerText=card.innerText.slice(0,120)
+
+item.onclick=()=>{
+
+card.scrollIntoView({
+behavior:"smooth",
+block:"center"
+})
+
+closeSearch()
+
+}
+
+results.appendChild(item)
+
+}
+
+})
+
+})
+
+})
+
+
+/* CLOSE JIKA KLIK BACKGROUND */
+
+document.getElementById("searchOverlay").addEventListener("click",function(e){
+
+if(e.target.id==="searchOverlay"){
+
+closeSearch()
+
+}
+
+})
 
 </script>
 
