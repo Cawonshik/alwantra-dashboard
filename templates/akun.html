@@ -39,39 +39,24 @@ class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-64"
 
 <!-- ================= FORM ================= -->
 
-<div class="bg-black border border-gray-800 rounded-xl p-6 mb-10">
+<div class="bg-black border border-gray-800 rounded-xl p-6 mb-6">
 
 <form method="POST" action="/add_akun" class="grid md:grid-cols-5 gap-4">
 
-<input
-name="gmail"
-placeholder="Gmail"
-class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
-/>
+<input name="gmail" placeholder="Gmail"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"/>
 
-<input
-name="twitter"
-placeholder="Twitter"
-class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
-/>
+<input name="twitter" placeholder="Twitter"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"/>
 
-<input
-name="telegram"
-placeholder="Telegram"
-class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
-/>
+<input name="telegram" placeholder="Telegram"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"/>
 
-<input
-name="discord"
-placeholder="Discord"
-class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
-/>
+<input name="discord" placeholder="Discord"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"/>
 
-<input
-name="github"
-placeholder="Github"
-class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"
-/>
+<input name="github" placeholder="Github"
+class="bg-black border border-gray-700 rounded-lg px-3 py-2 text-sm w-full"/>
 
 <button
 class="border border-cyan-400 text-cyan-400 px-4 py-2 rounded-lg hover:bg-cyan-400 hover:text-black col-span-full w-32">
@@ -79,6 +64,20 @@ ADD
 </button>
 
 </form>
+
+</div>
+
+
+<!-- ================= TOGGLE ACCOUNT ================= -->
+
+<div class="mb-6">
+
+<button
+id="toggleAccountBtn"
+onclick="toggleAllAccount()"
+class="border border-cyan-400 px-4 py-2 rounded hover:bg-cyan-400 hover:text-black">
+👁 Show Full
+</button>
 
 </div>
 
@@ -91,8 +90,6 @@ ADD
 
 <div class="account-card bg-[#061321] border border-cyan-400/20 rounded-xl p-6 flex flex-col gap-4 hover:shadow-[0_0_20px_rgba(0,255,224,0.25)] transition">
 
-<!-- HEADER -->
-
 <div class="flex justify-between items-center">
 
 <span class="text-cyan-400 font-semibold">
@@ -102,9 +99,8 @@ ACCOUNT #{{ loop.index }}
 </div>
 
 
-<!-- BODY -->
-
 <div class="flex flex-col gap-3 text-sm">
+
 
 <!-- ================= GMAIL ================= -->
 
@@ -115,15 +111,16 @@ ACCOUNT #{{ loop.index }}
 {% if item.gmail %}
 {% set gmail = item.gmail|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all account-text"
+data-full="{{ gmail }}"
+data-short="{{ gmail[:6] }}...{{ gmail[-4:] }}"
+>
 {{ gmail[:6] }}...{{ gmail[-4:] }}
 </span>
 
-<button
-class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ gmail }}')">
-📋
-</button>
+<button class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ gmail }}')">📋</button>
 
 {% else %}
 <span>-</span>
@@ -141,15 +138,16 @@ onclick="copy('{{ gmail }}')">
 {% if item.twitter %}
 {% set twitter = item.twitter|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all account-text"
+data-full="{{ twitter }}"
+data-short="{{ twitter[:6] }}...{{ twitter[-4:] }}"
+>
 {{ twitter[:6] }}...{{ twitter[-4:] }}
 </span>
 
-<button
-class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ twitter }}')">
-📋
-</button>
+<button class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ twitter }}')">📋</button>
 
 {% else %}
 <span>-</span>
@@ -167,15 +165,16 @@ onclick="copy('{{ twitter }}')">
 {% if item.telegram %}
 {% set telegram = item.telegram|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all account-text"
+data-full="{{ telegram }}"
+data-short="{{ telegram[:6] }}...{{ telegram[-4:] }}"
+>
 {{ telegram[:6] }}...{{ telegram[-4:] }}
 </span>
 
-<button
-class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ telegram }}')">
-📋
-</button>
+<button class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ telegram }}')">📋</button>
 
 {% else %}
 <span>-</span>
@@ -193,15 +192,16 @@ onclick="copy('{{ telegram }}')">
 {% if item.discord %}
 {% set discord = item.discord|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all account-text"
+data-full="{{ discord }}"
+data-short="{{ discord[:6] }}...{{ discord[-4:] }}"
+>
 {{ discord[:6] }}...{{ discord[-4:] }}
 </span>
 
-<button
-class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ discord }}')">
-📋
-</button>
+<button class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ discord }}')">📋</button>
 
 {% else %}
 <span>-</span>
@@ -219,15 +219,16 @@ onclick="copy('{{ discord }}')">
 {% if item.github %}
 {% set github = item.github|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all account-text"
+data-full="{{ github }}"
+data-short="{{ github[:6] }}...{{ github[-4:] }}"
+>
 {{ github[:6] }}...{{ github[-4:] }}
 </span>
 
-<button
-class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
-onclick="copy('{{ github }}')">
-📋
-</button>
+<button class="border border-cyan-400 px-2 py-1 rounded hover:bg-cyan-400 hover:text-black"
+onclick="copy('{{ github }}')">📋</button>
 
 {% else %}
 <span>-</span>
@@ -237,8 +238,6 @@ onclick="copy('{{ github }}')">
 
 </div>
 
-
-<!-- ACTION -->
 
 <div class="flex gap-2 mt-4">
 
@@ -267,69 +266,77 @@ Delete
 <script>
 
 function copy(text){
-
 if(!text) return
-
 navigator.clipboard.writeText(text)
-
 toast("Copied!")
-
 }
 
 function toast(msg){
 
 let old=document.getElementById("toast")
-
-if(old){
-old.remove()
-}
+if(old){old.remove()}
 
 let el=document.createElement("div")
-
 el.id="toast"
-
 el.innerText=msg
-
 el.className="fixed bottom-6 right-6 bg-cyan-400 text-black px-4 py-2 rounded-lg shadow-lg font-semibold"
 
 document.body.appendChild(el)
 
-setTimeout(()=>{
-el.remove()
-},2000)
+setTimeout(()=>{el.remove()},2000)
 
 }
 
 
 /* ================= SEARCH ================= */
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",function(){
 
 const search=document.getElementById("search")
 
 if(!search) return
 
-search.addEventListener("input", function(){
+search.addEventListener("input",function(){
 
 const value=this.value.toLowerCase()
-
 const cards=document.querySelectorAll(".account-card")
 
 cards.forEach(function(card){
 
 const text=card.innerText.toLowerCase()
 
-if(text.includes(value)){
-card.style.display="flex"
-}else{
-card.style.display="none"
+card.style.display=text.includes(value)?"flex":"none"
+
+})
+
+})
+
+})
+
+
+/* ================= TOGGLE ACCOUNT ================= */
+
+let showFull=false
+
+function toggleAllAccount(){
+
+const accounts=document.querySelectorAll(".account-text")
+const btn=document.getElementById("toggleAccountBtn")
+
+showFull=!showFull
+
+accounts.forEach(acc=>{
+
+const full=acc.dataset.full
+const short=acc.dataset.short
+
+acc.innerText=showFull?full:short
+
+})
+
+btn.innerText=showFull?"🙈 Hide Address":"👁 Show Full"
+
 }
-
-})
-
-})
-
-})
 
 </script>
 

@@ -27,7 +27,7 @@ Total Wallet
 
 <!-- ================= FORM ================= -->
 
-<div class="bg-black border border-gray-800 rounded-xl p-6 mb-10">
+<div class="bg-black border border-gray-800 rounded-xl p-6 mb-6">
 
 <form method="POST" action="/add_address" class="grid md:grid-cols-3 gap-4">
 
@@ -55,6 +55,20 @@ ADD
 </button>
 
 </form>
+
+</div>
+
+
+<!-- ================= TOGGLE ADDRESS ================= -->
+
+<div class="mb-6">
+
+<button
+id="toggleWalletBtn"
+onclick="toggleAllAddress()"
+class="border border-cyan-400 px-4 py-2 rounded hover:bg-cyan-400 hover:text-black">
+👁 Show Full
+</button>
 
 </div>
 
@@ -96,7 +110,11 @@ EVM
 {% if item.evm %}
 {% set evm = item.evm|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all wallet-text"
+data-full="{{ evm }}"
+data-short="{{ evm[:6] }}...{{ evm[-4:] }}"
+>
 {{ evm[:6] }}...{{ evm[-4:] }}
 </span>
 
@@ -136,7 +154,11 @@ SOL
 {% if item.sol %}
 {% set sol = item.sol|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all wallet-text"
+data-full="{{ sol }}"
+data-short="{{ sol[:6] }}...{{ sol[-4:] }}"
+>
 {{ sol[:6] }}...{{ sol[-4:] }}
 </span>
 
@@ -176,7 +198,11 @@ SUI
 {% if item.sui %}
 {% set sui = item.sui|string %}
 
-<span class="font-mono break-all">
+<span
+class="font-mono break-all wallet-text"
+data-full="{{ sui }}"
+data-short="{{ sui[:6] }}...{{ sui[-4:] }}"
+>
 {{ sui[:6] }}...{{ sui[-4:] }}
 </span>
 
@@ -264,6 +290,31 @@ el.className="fixed bottom-5 right-5 bg-cyan-400 text-black px-3 py-1 rounded sh
 document.body.appendChild(el)
 
 setTimeout(()=>el.remove(),1000)
+
+}
+
+
+/* ================= TOGGLE ADDRESS ================= */
+
+let showFull = false
+
+function toggleAllAddress(){
+
+const wallets = document.querySelectorAll(".wallet-text")
+const btn = document.getElementById("toggleWalletBtn")
+
+showFull = !showFull
+
+wallets.forEach(wallet => {
+
+const full = wallet.dataset.full
+const short = wallet.dataset.short
+
+wallet.innerText = showFull ? full : short
+
+})
+
+btn.innerText = showFull ? "🙈 Hide Address" : "👁 Show Full"
 
 }
 
