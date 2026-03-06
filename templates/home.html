@@ -22,12 +22,12 @@ font-family:Orbitron;
 
 <!-- BACKGROUND -->
 
-<div class="fixed inset-0 bg-[radial-gradient(circle_at_top,#00111f,#000000)] -z-10"></div>
+<div class="fixed inset-0 bg-[radial-gradient(circle_at_top,#001d33,#000000)] -z-10"></div>
 
 
 <!-- NAVBAR -->
 
-<header class="border-b border-gray-800">
+<header class="border-b border-gray-800 backdrop-blur">
 
 <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
@@ -38,12 +38,12 @@ font-family:Orbitron;
 <div class="flex gap-4">
 
 <a href="/login"
-class="border border-gray-700 px-4 py-1 rounded hover:border-cyan-400">
+class="border border-gray-700 px-4 py-1 rounded hover:border-cyan-400 transition">
 Login
 </a>
 
 <a href="/register"
-class="bg-cyan-500 hover:bg-cyan-400 text-black px-4 py-1 rounded font-semibold">
+class="bg-cyan-500 hover:bg-cyan-400 text-black px-4 py-1 rounded font-semibold transition">
 Register
 </a>
 
@@ -57,7 +57,7 @@ Register
 
 <!-- HERO -->
 
-<section class="max-w-7xl mx-auto px-6 py-28 text-center">
+<section class="max-w-7xl mx-auto px-6 py-32 text-center">
 
 <h1 class="text-4xl md:text-6xl font-bold leading-tight">
 
@@ -77,12 +77,12 @@ Built for serious farmers.
 <div class="mt-10 flex justify-center gap-6">
 
 <a href="/register"
-class="bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-3 rounded-lg font-semibold">
+class="bg-cyan-500 hover:bg-cyan-400 text-black px-6 py-3 rounded-lg font-semibold transition">
 Get Started
 </a>
 
 <a href="/login"
-class="border border-gray-700 px-6 py-3 rounded-lg hover:border-cyan-400">
+class="border border-gray-700 px-6 py-3 rounded-lg hover:border-cyan-400 transition">
 Login
 </a>
 
@@ -102,7 +102,8 @@ Features
 
 <div class="grid md:grid-cols-3 gap-10">
 
-<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl">
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl 
+hover:border-cyan-400/50 hover:scale-[1.02] transition">
 
 <h3 class="text-cyan-400 text-xl font-semibold mb-3">
 Airdrop Tracking
@@ -114,7 +115,8 @@ Track all your airdrop tasks, status, and notes in one place.
 
 </div>
 
-<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl">
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl 
+hover:border-cyan-400/50 hover:scale-[1.02] transition">
 
 <h3 class="text-cyan-400 text-xl font-semibold mb-3">
 Wallet Manager
@@ -126,7 +128,8 @@ Store and organize EVM, Solana, and Sui wallets easily.
 
 </div>
 
-<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl">
+<div class="bg-[#0d1424] border border-gray-800 p-6 rounded-xl 
+hover:border-cyan-400/50 hover:scale-[1.02] transition">
 
 <h3 class="text-cyan-400 text-xl font-semibold mb-3">
 Account Storage
@@ -152,9 +155,9 @@ Save Gmail, Twitter, Telegram, Discord and GitHub accounts safely.
 Clean Web3 Dashboard
 </h2>
 
-<div class="border border-gray-800 rounded-xl overflow-hidden">
+<div class="border border-gray-800 rounded-xl overflow-hidden shadow-2xl">
 
-<img src="/static/dashboard.png" class="w-full">
+<img src="/static/dashboard.png" class="w-full border border-cyan-400/20">
 
 </div>
 
@@ -179,7 +182,7 @@ Organize hundreds of wallets and accounts effortlessly.
 </p>
 
 <a href="/register"
-class="bg-cyan-500 hover:bg-cyan-400 text-black px-8 py-3 rounded-lg font-semibold">
+class="bg-cyan-500 hover:bg-cyan-400 text-black px-8 py-3 rounded-lg font-semibold transition">
 Create Free Account
 </a>
 
@@ -201,7 +204,7 @@ Create Free Account
 
 <a href="https://twitter.com/alwantraxyz"
 target="_blank"
-class="hover:text-cyan-400 flex items-center gap-2">
+class="hover:text-cyan-400 flex items-center gap-2 transition">
 
 <svg xmlns="http://www.w3.org/2000/svg"
 width="22"
@@ -222,7 +225,7 @@ Twitter
 
 <a href="https://t.me/prayans"
 target="_blank"
-class="hover:text-cyan-400 flex items-center gap-2">
+class="hover:text-cyan-400 flex items-center gap-2 transition">
 
 <svg xmlns="http://www.w3.org/2000/svg"
 width="22"
@@ -252,3 +255,6 @@ Telegram
 </div>
 
 </footer>
+
+</body>
+</html>
