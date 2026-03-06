@@ -25,19 +25,20 @@ def _get_all_cached():
             continue
 
         # Pastikan panjang kolom cukup
-        r = r + [""] * (10 - len(r))
+        r = r + [""] * (11 - len(r))
 
         data.append({
             "id": r[0],
             "user_id": r[1],
-            "name": r[2],
-            "type": r[3],
-            "chain": r[4],
-            "wallet": r[5],
-            "channel": r[6],
-            "note": r[7],
-            "status": r[8],
-            "date": r[9],
+            "logo": r[2],
+            "name": r[3],
+            "type": r[4],
+            "chain": r[5],
+            "wallet": r[6],
+            "channel": r[7],
+            "note": r[8],
+            "status": r[9],
+            "date": r[10],
         })
 
     return data
@@ -82,6 +83,7 @@ def add(data, user_id):
 
         str(uuid.uuid4()),                     # id
         user_id,                               # user_id
+        data.get("logo", "🚀"),                 # logo
         data.get("name", ""),                  # name
         data.get("type", ""),                  # type
         data.get("chain", ""),                 # chain
@@ -130,7 +132,7 @@ def done(id, user_id):
             and str(r[1]) == str(user_id)
         ):
 
-            sheet.update_cell(i, 9, "done")
+            sheet.update_cell(i, 10, "done")
             break
 
     _get_all_cached.cache_clear()
@@ -151,8 +153,9 @@ def update(id, data, user_id):
         ):
 
             sheet.update(
-                f"C{i}:H{i}",
+                f"C{i}:I{i}",
                 [[
+                    data.get("logo", "🚀"),
                     data.get("name", ""),
                     data.get("type", ""),
                     data.get("chain", ""),
