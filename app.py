@@ -38,16 +38,28 @@ def load_user(user_id):
 
     try:
         return User.get(user_id)
-
     except Exception:
         return None
+
+
+# ==================================================
+# LANDING PAGE
+# ==================================================
+
+@app.route("/")
+def home():
+
+    if current_user.is_authenticated:
+        return redirect("/dashboard")
+
+    return render_template("home.html")
 
 
 # ==================================================
 # DASHBOARD
 # ==================================================
 
-@app.route("/")
+@app.route("/dashboard")
 @login_required
 def dashboard():
 
@@ -79,7 +91,7 @@ def add_airdrop():
 
     airdrop.add(request.form, current_user.id)
 
-    return redirect("/")
+    return redirect("/dashboard")
 
 
 @app.route("/delete_airdrop/<id>")
@@ -88,7 +100,7 @@ def delete_airdrop(id):
 
     airdrop.delete(id, current_user.id)
 
-    return redirect("/")
+    return redirect("/dashboard")
 
 
 @app.route("/done_airdrop/<id>")
@@ -97,7 +109,7 @@ def done_airdrop(id):
 
     airdrop.done(id, current_user.id)
 
-    return redirect("/")
+    return redirect("/dashboard")
 
 
 @app.route("/edit_airdrop/<id>")
@@ -107,7 +119,7 @@ def edit_airdrop(id):
     item = airdrop.get_by_id(id, current_user.id)
 
     if not item:
-        return redirect("/")
+        return redirect("/dashboard")
 
     return render_template(
         "edit_airdrop.html",
@@ -121,7 +133,7 @@ def update_airdrop(id):
 
     airdrop.update(id, request.form, current_user.id)
 
-    return redirect("/")
+    return redirect("/dashboard")
 
 
 # ==================================================
@@ -160,7 +172,7 @@ def export_airdrop():
     data = airdrop.get_all(current_user.id)
 
     if not data:
-        return redirect("/")
+        return redirect("/dashboard")
 
     si = StringIO()
     cw = csv.writer(si)
